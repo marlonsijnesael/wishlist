@@ -3,11 +3,15 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/wouter">Wouter's list</router-link> |
     <router-link to="/kelsey">Kelsey's list</router-link> 
-
-    
   </nav>
   <router-view/>
 </template>
+
+<script>
+  export default {
+ 
+  }
+</script>
 
 <style lang="scss">
 #app {

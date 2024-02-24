@@ -1,12 +1,11 @@
 <template>
     <li class="wishlist-item">
-        <img class="wishlist-item__image" :src="item.imageUrl">
+        <img class="wishlist-item__image" :src="`${item.image}?random=${Math.random() * 10}`">
 
         <div class="wishlist-item__content">
-            <router-link :to="{ path: `items/${slugify('asdasd')}`, query: { item: stringify(item) } }">
-
+            <router-link class="wishlist-item__link" :to="{ path: `${person}/items/${item.id}`}">
                 <p class="wishlist-item__name">{{ item.name }}</p>
-                <p class="wishlist-item__price">{{ item.price }}</p>
+                <p class="wishlist-item__price">${{ item.price }}</p>
             </router-link>
         </div>
     </li>
@@ -16,22 +15,9 @@
 
 export default {
     name: 'WishlistList',
-    props: ['item'],
+    props: ['person','item'],
     components: {
     },
-    methods: {
-        stringify(item) {
-            return JSON.stringify(item)
-        },
-        slugify(str) {
-            str = str.replace(/^\s+|\s+$/g, ''); // trim leading/trailing white space
-            str = str.toLowerCase(); // convert string to lowercase
-            str = str.replace(/[^a-z0-9 -]/g, '') // remove any non-alphanumeric characters
-                .replace(/\s+/g, '-') // replace spaces with hyphens
-                .replace(/-+/g, '-'); // remove consecutive hyphens
-            return str;
-        }
-    }
 }
 </script>
   
@@ -57,6 +43,10 @@ export default {
     position: relative;
 }
 
+.wishlist-item__name {
+    color: #ffffff
+}
+
 .wishlist-item__image {
     position: absolute;
     width: calc(100% - 12px);
@@ -65,6 +55,11 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     object-fit: cover;
+}
+
+.wishlist-item__price {
+    color: white;
+    text-decoration: none
 }
 
 .wishlist-item__content {
@@ -78,6 +73,7 @@ export default {
     height: 100%;
     width: 100%;
     color: #ffffff;
+    text-decoration: none;
 
     &:hover {
         background-color: rgba(0, 0, 0, 0.5);

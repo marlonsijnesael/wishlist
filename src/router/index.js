@@ -1,38 +1,40 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import WishlistPage from '../views/WishlistPage.vue'
-import { wishlistPages } from '@/pages/WishListPages'
 import WishlistDetailPage from '@/views/WishlistDetailPage'
 import HomePage from '@/views/HomePage'
 
+const wishlistEndpoints = [
+  "wouter",
+  "kelsey"
+]
+
 const wishlistRoutes = () =>{
   const routes = []
-  for (const page of wishlistPages){
+  for (const page of wishlistEndpoints){
     const route = {
-      path: `/${page.path}`,
-      name: `wishlist-${page.path}`,
+      path: `/${page}`,
+      name: `wishlist-${page}`,
       component: WishlistPage,
-      props: { pageData: page.data, title: page.path}
+      props: { page:page}
     }
     routes.push(route)
   }
   return routes
 }
 
-const routes = [
+let routes = [
   {
     path: '/',
     name: 'home',
     component: HomePage,
   },
   {
-    path: '/items/:path',
+    path: '/:person/items/:path',
     component: WishlistDetailPage,
     props: true 
   },
   ...wishlistRoutes()
 ]
-
-console.log('routes', wishlistRoutes())
 
 const router = createRouter({
   history: createWebHashHistory(),
