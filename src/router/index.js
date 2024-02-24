@@ -1,7 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import WishlistPage from '../views/WishlistPage.vue'
 import { wishlistPages } from '@/pages/WishListPages'
-
+import WishlistDetailPage from '@/views/WishlistDetailPage'
+import HomePage from '@/views/HomePage'
 
 const wishlistRoutes = () =>{
   const routes = []
@@ -20,11 +21,14 @@ const wishlistRoutes = () =>{
 const routes = [
   {
     path: '/',
-    name: 'wishlist',
-    component: WishlistPage,
-    // props: { data: }
+    name: 'home',
+    component: HomePage,
   },
-
+  {
+    path: '/items/:path',
+    component: WishlistDetailPage,
+    props: true 
+  },
   ...wishlistRoutes()
 ]
 

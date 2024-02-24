@@ -3,10 +3,11 @@
         <img class="wishlist-item__image" :src="item.imageUrl">
 
         <div class="wishlist-item__content">
-            <a class="wishlist-item__link" :href="item.shopUrl">
-            <p class="wishlist-item__name">{{ item.name }}</p>
-            <p class="wishlist-item__price">{{ item.price }}</p>
-            </a>
+            <router-link :to="{ path: `items/${slugify('asdasd')}`, query: { item: stringify(item) } }">
+
+                <p class="wishlist-item__name">{{ item.name }}</p>
+                <p class="wishlist-item__price">{{ item.price }}</p>
+            </router-link>
         </div>
     </li>
 </template>
@@ -17,6 +18,19 @@ export default {
     name: 'WishlistList',
     props: ['item'],
     components: {
+    },
+    methods: {
+        stringify(item) {
+            return JSON.stringify(item)
+        },
+        slugify(str) {
+            str = str.replace(/^\s+|\s+$/g, ''); // trim leading/trailing white space
+            str = str.toLowerCase(); // convert string to lowercase
+            str = str.replace(/[^a-z0-9 -]/g, '') // remove any non-alphanumeric characters
+                .replace(/\s+/g, '-') // replace spaces with hyphens
+                .replace(/-+/g, '-'); // remove consecutive hyphens
+            return str;
+        }
     }
 }
 </script>
@@ -46,7 +60,7 @@ export default {
 .wishlist-item__image {
     position: absolute;
     width: calc(100% - 12px);
-    height:  calc(100% - 12px);
+    height: calc(100% - 12px);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -66,7 +80,7 @@ export default {
     color: #ffffff;
 
     &:hover {
-        background-color: rgba(0,0,0,0.5);
+        background-color: rgba(0, 0, 0, 0.5);
         opacity: 1;
     }
 }
