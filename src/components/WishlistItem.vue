@@ -1,21 +1,20 @@
 <template>
-    <li class="wishlist-item">
-        <img class="wishlist-item__image" :src="`${item.image}?random=${Math.random() * 10}`">
-
-        <div class="wishlist-item__content">
-            <router-link class="wishlist-item__link" :to="{ path: `${person}/items/${item.id}`}">
+    <router-link class="wishlist-item__link" :to="{ path: `${person}/items/${item.id}` }">
+        <li class="wishlist-item">
+            <img class="wishlist-item__image" :src="`${item.image}?random=${Math.random() * 10}`">
+            <div class="wishlist-item__content">
                 <p class="wishlist-item__name">{{ item.name }}</p>
                 <p class="wishlist-item__price">${{ item.price }}</p>
-            </router-link>
-        </div>
-    </li>
+            </div>
+        </li>
+    </router-link>
 </template>
   
 <script>
 
 export default {
     name: 'WishlistList',
-    props: ['person','item'],
+    props: ['person', 'item'],
     components: {
     },
 }
